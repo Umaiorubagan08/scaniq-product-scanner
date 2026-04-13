@@ -751,8 +751,9 @@ body{
   display:flex;align-items:flex-end;justify-content:center;
   z-index:9999;padding:0 0 var(--safe-bot);
   transition:opacity 0.3s;
+  opacity:1;pointer-events:auto;
 }
-#consentModal.hidden{opacity:0;pointer-events:none}
+#consentModal.hidden{opacity:0;pointer-events:none;visibility:hidden}
 .consent-sheet{
   background:var(--blk2);
   border:1px solid var(--blk4);
@@ -803,8 +804,11 @@ body{
   transition:all 0.18s;
   -webkit-user-select:none;user-select:none;
   min-height:48px;display:flex;align-items:center;justify-content:center;
+  -webkit-tap-highlight-color:transparent;
+  padding:16px;
 }
-.cs-allow:active{transform:scale(0.97);box-shadow:0 2px 8px var(--red-glow)}
+.cs-allow:active, .cs-allow:focus{transform:scale(0.97);box-shadow:0 2px 8px var(--red-glow);outline:none}
+.cs-allow:hover{opacity:0.95}
 .cs-skip{
   padding:13px;border-radius:var(--r12);
   border:1px solid var(--blk5);background:transparent;
@@ -812,8 +816,10 @@ body{
   cursor:pointer;width:100%;transition:all 0.18s;
   min-height:48px;display:flex;align-items:center;justify-content:center;
   -webkit-user-select:none;user-select:none;
+  -webkit-tap-highlight-color:transparent;
 }
-.cs-skip:active{background:var(--blk3)}
+.cs-skip:active, .cs-skip:focus{background:var(--blk3);outline:none}
+.cs-skip:hover{background:var(--blk4)}
 
 /* ═══════════════════════════════════════════════
    API KEY MODAL STYLES
@@ -823,8 +829,9 @@ body{
   background:rgba(0,0,0,0.92);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);
   display:flex;align-items:flex-end;justify-content:center;
   z-index:9999;padding:0 0 var(--safe-bot);transition:opacity 0.3s;
+  opacity:1;pointer-events:auto;
 }
-#apiKeyModal.hidden{opacity:0;pointer-events:none}
+#apiKeyModal.hidden{opacity:0;pointer-events:none;visibility:hidden}
 .api-sheet{
   background:var(--blk2);border:1px solid var(--blk4);border-radius:var(--r20) var(--r20) 0 0;
   padding:24px 20px calc(24px + var(--safe-bot));width:100%;max-width:480px;
@@ -939,8 +946,8 @@ body{
       <b style="color:var(--gold)">📱 Mobile Tip:</b> Make sure you're using <b style="color:var(--gold)">HTTPS</b> (secure connection). Camera only works on encrypted connections.
     </div>
     <div class="cs-btns">
-      <button class="cs-allow" onclick="grantConsent()" id="csAllowBtn">Allow Camera &amp; Continue</button>
-      <button class="cs-skip" onclick="skipCameraConsent()">Use Upload Only (No Camera)</button>
+      <button type="button" class="cs-allow" onclick="grantConsent()" id="csAllowBtn">Allow Camera &amp; Continue</button>
+      <button type="button" class="cs-skip" onclick="skipCameraConsent()">Use Upload Only (No Camera)</button>
     </div>
   </div>
 </div>
@@ -962,8 +969,8 @@ body{
       <b>Get your free API key:</b> Visit <a href="https://openrouter.ai" target="_blank" rel="noopener noreferrer">openrouter.ai</a>, sign up, and copy your API key from settings.
     </div>
     <div class="api-btns">
-      <button class="api-save" onclick="saveApiKey()">Save API Key</button>
-      <button class="api-cancel" onclick="cancelApiKeyModal()">Cancel</button>
+      <button type="button" class="api-save" onclick="saveApiKey()">Save API Key</button>
+      <button type="button" class="api-cancel" onclick="cancelApiKeyModal()">Cancel</button>
     </div>
   </div>
 </div>
@@ -988,10 +995,10 @@ body{
         </div>
       </div>
       <div class="lang-sw" role="group" aria-label="Language selector">
-        <button class="lsw-btn active" onclick="setLang('en')" id="btnEN" aria-label="English" aria-pressed="true">EN</button>
-        <button class="lsw-btn ta" onclick="setLang('ta')" id="btnTA" aria-label="Tamil" aria-pressed="false">த</button>
+        <button type="button" class="lsw-btn active" onclick="setLang('en')" id="btnEN" aria-label="English" aria-pressed="true">EN</button>
+        <button type="button" class="lsw-btn ta" onclick="setLang('ta')" id="btnTA" aria-label="Tamil" aria-pressed="false">த</button>
       </div>
-      <button class="lsw-btn" onclick="showApiKeyModal()" aria-label="Settings" title="Configure API key" style="padding:5px 10px;font-size:16px">⚙️</button>
+      <button type="button" class="lsw-btn" onclick="showApiKeyModal()" aria-label="Settings" title="Configure API key" style="padding:5px 10px;font-size:16px">⚙️</button>
     </div>
   </header>
 
@@ -1043,9 +1050,9 @@ body{
     </div>
     <!-- camera snap controls -->
     <div id="camCtrls" role="toolbar" aria-label="Camera controls">
-      <button class="cctrl cctrl-util" onclick="document.getElementById('fileInput').click()" aria-label="Upload photo" title="Upload from gallery">🖼</button>
-      <button class="cctrl cctrl-snap" onclick="capturePhoto()" id="snapBtn" aria-label="Take photo" title="Capture">📸</button>
-      <button class="cctrl cctrl-util" onclick="flipCamera()" aria-label="Flip camera" title="Switch camera">🔄</button>
+      <button type="button" class="cctrl cctrl-util" onclick="document.getElementById('fileInput').click()" aria-label="Upload photo" title="Upload from gallery">🖼</button>
+      <button type="button" class="cctrl cctrl-snap" onclick="capturePhoto()" id="snapBtn" aria-label="Take photo" title="Capture">📸</button>
+      <button type="button" class="cctrl cctrl-util" onclick="flipCamera()" aria-label="Flip camera" title="Switch camera">🔄</button>
     </div>
   </section>
   <input type="file" id="fileInput" accept="image/*" onchange="handleUpload(event)" aria-label="Upload product photo">
@@ -1058,25 +1065,25 @@ body{
   <!-- BOTTOM BAR -->
   <footer id="bottomBar">
     <div id="barIdle" role="group" aria-label="Scan controls">
-      <button class="bar-main-btn" onclick="openCamera()" id="mainCamBtn" aria-label="Open camera">
+      <button type="button" class="bar-main-btn" onclick="openCamera()" id="mainCamBtn" aria-label="Open camera">
         <span aria-hidden="true">📷</span><span id="mainCamTxt">Open Camera</span>
       </button>
-      <button class="bar-icon-btn" onclick="document.getElementById('fileInput').click()" aria-label="Upload photo from gallery" title="Upload photo">🖼</button>
+      <button type="button" class="bar-icon-btn" onclick="document.getElementById('fileInput').click()" aria-label="Upload photo from gallery" title="Upload photo">🖼</button>
     </div>
     <div id="barCamera">
-      <button class="stop-btn" onclick="stopCamera()" aria-label="Stop camera">
+      <button type="button" class="stop-btn" onclick="stopCamera()" aria-label="Stop camera">
         <span aria-hidden="true">⏹</span> <span id="stopTxt">Stop Camera</span>
       </button>
     </div>
     <div id="barResult">
-      <button class="aud-play" id="audPlayBtn" onclick="toggleAudio()" aria-label="Play audio summary">▶</button>
+      <button type="button" class="aud-play" id="audPlayBtn" onclick="toggleAudio()" aria-label="Play audio summary">▶</button>
       <div class="aud-info">
         <div class="aud-name" id="audProdName">—</div>
         <div class="aud-sub" id="audSubTxt">Tap ▶ for audio summary</div>
         <div class="aud-prog"><div class="aud-fill" id="audFill"></div></div>
       </div>
-      <button class="aud-lang-btn" onclick="toggleAudioLang()" id="audLangBtn" aria-label="Switch audio language">தமிழ்</button>
-      <button class="scan-again" onclick="scanAgain()" aria-label="Scan another product" title="Scan again">📷</button>
+      <button type="button" class="aud-lang-btn" onclick="toggleAudioLang()" id="audLangBtn" aria-label="Switch audio language">தமிழ்</button>
+      <button type="button" class="scan-again" onclick="scanAgain()" aria-label="Scan another product" title="Scan again">📷</button>
     </div>
   </footer>
 
@@ -1221,7 +1228,10 @@ function skipCameraConsent(){
 function closeConsent(){
   const m=document.getElementById('consentModal');
   m.classList.add('hidden');
-  setTimeout(()=>m.style.display='none',350);
+  setTimeout(()=>{
+    m.style.display='none';
+    m.style.visibility='hidden';
+  },350);
 }
 
 /* ════════════════════════════════════════════
@@ -1622,7 +1632,7 @@ JSON schema:
         <div style="font-size:48px;margin-bottom:16px">⚠️</div>
         <p style="font-family:var(--ffc);font-size:17px;font-weight:700;color:var(--red3);margin-bottom:8px">${safe(t('t_scanErr'))}</p>
         <p style="font-size:12px;color:var(--white4);margin-bottom:20px;line-height:1.6">${lang==='en'?'Make sure the product label is clearly visible, well-lit, and in focus.':'தயாரிப்பு லேபில் தெளிவாக, நன்கு வெளிச்சமாக மற்றும் ஃபோகஸில் இருப்பதை உறுதி செய்யுங்கள்.'}</p>
-        <button onclick="scanAgain()" style="padding:13px 28px;border-radius:var(--r12);border:none;background:linear-gradient(135deg,var(--red),#8b0000);color:#fff;font-family:var(--ff);font-size:14px;font-weight:700;cursor:pointer;box-shadow:0 4px 16px var(--red-glow)">📷 ${lang==='en'?'Try Again':'மீண்டும் முயற்சி'}</button>
+        <button type="button" onclick="scanAgain()" style="padding:13px 28px;border-radius:var(--r12);border:none;background:linear-gradient(135deg,var(--red),#8b0000);color:#fff;font-family:var(--ff);font-size:14px;font-weight:700;cursor:pointer;box-shadow:0 4px 16px var(--red-glow)">📷 ${lang==='en'?'Try Again':'மீண்டும் முயற்சி'}</button>
       </div>`;
     setBar('idle');
   }
@@ -1931,6 +1941,81 @@ document.addEventListener('visibilitychange',()=>{
     document.getElementById('camZone').className='idle-h';
     if(product) setBar('result');
     else setBar('idle');
+  }
+});
+
+// Initialize button event listeners (mobile tap fix)
+let blockMultipleClicks=false;
+document.addEventListener('DOMContentLoaded',()=>{
+  // Consent Modal buttons
+  const allowBtn=document.querySelector('.cs-allow');
+  const skipBtn=document.querySelector('.cs-skip');
+  
+  if(allowBtn){
+    allowBtn.addEventListener('click',e=>{
+      e.preventDefault();
+      e.stopPropagation();
+      if(!blockMultipleClicks){
+        blockMultipleClicks=true;
+        grantConsent();
+        setTimeout(()=>{blockMultipleClicks=false;},500);
+      }
+    });
+  }
+  
+  if(skipBtn){
+    skipBtn.addEventListener('click',e=>{
+      e.preventDefault();
+      e.stopPropagation();
+      if(!blockMultipleClicks){
+        blockMultipleClicks=true;
+        skipCameraConsent();
+        setTimeout(()=>{blockMultipleClicks=false;},500);
+      }
+    });
+  }
+  
+  // API Modal buttons
+  const saveBtn=document.querySelector('.api-save');
+  const cancelBtn=document.querySelector('.api-cancel');
+  
+  if(saveBtn){
+    saveBtn.addEventListener('click',e=>{
+      e.preventDefault();
+      e.stopPropagation();
+      if(!blockMultipleClicks){
+        blockMultipleClicks=true;
+        saveApiKey();
+        setTimeout(()=>{blockMultipleClicks=false;},500);
+      }
+    });
+  }
+  
+  if(cancelBtn){
+    cancelBtn.addEventListener('click',e=>{
+      e.preventDefault();
+      e.stopPropagation();
+      if(!blockMultipleClicks){
+        blockMultipleClicks=true;
+        cancelApiKeyModal();
+        setTimeout(()=>{blockMultipleClicks=false;},500);
+      }
+    });
+  }
+  
+  // Ensure modals are visible and clickable on load
+  const consentModal=document.getElementById('consentModal');
+  const apiModal=document.getElementById('apiKeyModal');
+  
+  if(consentModal){
+    consentModal.style.display='flex';
+    consentModal.style.visibility='visible';
+    consentModal.classList.remove('hidden');
+  }
+  
+  if(apiModal){
+    apiModal.classList.add('hidden');
+    apiModal.style.visibility='hidden';
   }
 });
 
