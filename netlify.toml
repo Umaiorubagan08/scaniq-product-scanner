@@ -1,0 +1,42 @@
+# Netlify Configuration for ScanIQ
+# This file configures how your site is built and deployed
+
+[build]
+  # No build command needed (static site)
+  command = ""
+  # Root directory (where HTML file is)
+  base = "."
+  # Publish directory
+  publish = "."
+
+# Environment variables for Netlify
+[build.environment]
+  # Add your OpenRouter API key in Netlify Site Settings → Environment
+  # OR set it here (NOT recommended - use Site Settings instead for security)
+  # REACT_APP_OPENROUTER_API_KEY = "your-api-key-here"
+
+# Redirects (optional - for fallback routing)
+[[redirects]]
+  from = "/*"
+  to = "/product_supermarket.html"
+  status = 200
+
+# Headers (optional - security & performance)
+[[headers]]
+  for = "/*"
+  [headers.values]
+    X-Content-Type-Options = "nosniff"
+    X-Frame-Options = "SAMEORIGIN"
+    X-XSS-Protection = "1; mode=block"
+    Referrer-Policy = "strict-origin-when-cross-origin"
+
+# Cache control
+[[headers]]
+  for = "*.html"
+  [headers.values]
+    Cache-Control = "public, max-age=3600"
+
+[[headers]]
+  for = "*.js"
+  [headers.values]
+    Cache-Control = "public, max-age=31536000"

@@ -1,0 +1,36 @@
+{
+  "name": "scaniq-product-scanner",
+  "version": "1.0.0",
+  "description": "AI-powered product scanner - instant nutrition, safety & health info using OpenRouter free API",
+  "main": "product_supermarket.html",
+  "keywords": [
+    "product-scanner",
+    "ai",
+    "nutrition",
+    "allergens",
+    "health",
+    "openrouter",
+    "llama",
+    "mobile-first"
+  ],
+  "author": "Your Name",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/YOUR_USERNAME/scaniq-product-scanner.git"
+  },
+  "bugs": {
+    "url": "https://github.com/YOUR_USERNAME/scaniq-product-scanner/issues"
+  },
+  "homepage": "https://github.com/YOUR_USERNAME/scaniq-product-scanner#readme",
+  "engines": {
+    "node": ">=14.0.0"
+  },
+  "scripts": {
+    "start": "open product_supermarket.html || xdg-open product_supermarket.html",
+    "deploy:github": "git push origin main",
+    "deploy:netlify": "netlify deploy --prod"
+  },
+  "devDependencies": {},
+  "dependencies": {}
+}
